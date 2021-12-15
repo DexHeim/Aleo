@@ -89,7 +89,7 @@ main() {
 	fi
 	
 	# Actions
-	sudo apt install wget jq bc -y &>/dev/null
+	# sudo apt install wget jq bc -y &>/dev/null
 	if [ -n "$ALEO_ADDRESS" ]; then local wallet_address="$ALEO_ADDRESS"; fi
 	if [ -f /etc/systemd/system/aleod.service ]; then
 		local service_file_path="/etc/systemd/system/aleod.service"
