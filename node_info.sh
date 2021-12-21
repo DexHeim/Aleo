@@ -114,9 +114,9 @@ main() {
 	local node_info=`wget -qO-  -t 1 -T 5 --post-data '{"jsonrpc": "2.0", "id":"documentation", "method": "getnodestate", "params": [] }' "$local_rpc" 2>/dev/null | jq`
 	local leaderboard_info=`wget -qO- "https://www.aleo.network/api/leaderboard?address=$wallet_address" | jq`
 	
-	local mined_blocks=`jq -r ".blocksMined | length" <<< "$leaderboard_info"`
-	local position=`jq -r ".position" <<< "$leaderboard_info"`
-	local points=`jq -r ".score" <<< "$leaderboard_info"`
+	local mined_blocks=`jq -r ".leaderboard[0].blocksMined" <<< "$leaderboard_info"`
+	local position=`jq -r ".leaderboard[0].position" <<< "$leaderboard_info"`
+	local points=`jq -r ".leaderboard[0].score" <<< "$leaderboard_info"`
 	
 	local node_version="`snarkos --version` v`jq -r '.result.version' <<< \"$node_info\"`"
 	local latest_block_height=`jq -r ".result.latest_block_height" <<< $node_info`
