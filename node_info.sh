@@ -112,7 +112,7 @@ main() {
 	
 	local local_rpc="http://localhost:${port}/"
 	local node_info=`wget -qO-  -t 1 -T 5 --post-data '{"jsonrpc": "2.0", "id":"documentation", "method": "getnodestate", "params": [] }' "$local_rpc" 2>/dev/null | jq`
-	local leaderboard_info=`wget -qO- "https://www.aleo.network/api/leaderboard?address=$wallet_address" | jq`
+	local leaderboard_info=`wget -qO- "https://www.aleo.network/api/leaderboard?search=$wallet_address" | jq`
 	
 	local mined_blocks=`jq -r ".leaderboard[0].blocksMined" <<< "$leaderboard_info"`
 	local position=`jq -r ".leaderboard[0].position" <<< "$leaderboard_info"`
